@@ -48,40 +48,44 @@ document.write("Hola estoy en HTML");
 /*
 && || ! == ===
 
-i++
+i++ i--
 
-suma = suma + 5
-suma += 5
+suma = suma +5;
+suma += 5;
+
 +=
 -=
 *=
+/=
+%=
 */
-
 //Estructuras de control
 
+let nota = 8;
 if(nota >= 7){
     console.log("la nota es aprobada");
 }
 else{
-    console.log("la nota es desaprobada");
+    console.log("La nota es desaprobada");
 }
-
 
 if(nota >= 7){
     console.log("la nota es aprobada");
 }
-else if(nota >= 4){
-    console.log("van a final");
+else if (nota >= 4){
+    console.log("va a final");
 }
-else {
-    console.log("desaprobados");
+else{
+    console.log("La nota es desaprobada");
 }
 
-// tenornario
 
-let calificacion = nota > 7 ? "aprobado" : "desaprobado";
+//ternario
 
-// Switch
+let calificacion = nota >= 7 ? "aprobado" : "desaprobado";
+
+
+//Switch
 
 switch(nota){
     case 10:
@@ -93,37 +97,43 @@ switch(nota){
         calificacion = "Buen examen";
         break;
     default:
-        calificacion = "calificacion invalida";
+        calificacion = "calificacion es invalida";
         break;
 }
 
-// bucles
+
+//Bucles
 
 i=0;
-while(i < 5){
+for(i = 0; i<=5; i++){
+    console.log("valor de i: ", i);
+}
+
+while(i <= 5){
     console.log("valor de i: ", i);
     i++;
 }
 
-for (i =0; i<5; i++){
-    console.log("Valores de i: ", i);
-}
-
-// Funciones
+//funciones
 
 //declaracion
 
-function saludo(parametro, parametroDos, nota) {
-    let promedio = parametroDos + nota;
-    console.log("Hola como estas?" + parametro);
+function saludo(parametro, parametroDos, nota){
+    let promedio = parametro + nota;
+    console.log("Hola como estas? " + parametro);
+}
+
+function saludoDos(parametro, parametroDos, nota){
+   return  parametro + nota;
 }
 
 //llamado
+
 saludo("Gisela", 5, nota);
 
 
 function tablaMultiplicar(tabla, hasta){
-    for(let i = 1; i <= hasta; i++){
+    for(i = 1; i <= hasta; i++){
         console.log(tabla + " x " + i + " = ", tabla*i);
     }
 }
@@ -131,27 +141,26 @@ function tablaMultiplicar(tabla, hasta){
 tablaMultiplicar(5, 8);
 tablaMultiplicar(6, 10);
 
-
-function tablaMultiplicar(tabla, hasta = 6){
-    for(let i = 1; i <= hasta; i++){
-        console.log(tabla + " x " + i + " = ", tabla*i);
-    }
-}
-
-tablaMultiplicar(5);
-
 //return
-let nota = 5;
+
 let notaDos = 10;
 
 function sumar(nota, notaDos){
-    return nota +notaDos;
+    return nota + notaDos;
 }
 
-let resultado = sumar(nota, notaDos);
-console.log(resultado);
+sumar(nota, notaDos);
 
-// funcion este en una varibale
+//parametro definido
+
+function sumar(nota, notaDos = 7){
+    return nota + notaDos;
+}
+
+sumar(nota);
+
+
+// funcion en variable
 
 let sumatoria = function(nota, notaDos){
     return nota + notaDos;
@@ -159,57 +168,66 @@ let sumatoria = function(nota, notaDos){
 
 sumatoria(nota, notaDos);
 
+
 //Arrow function
 
 let sumatoriaDos = nota => nota*2;
 
 sumatoriaDos(nota);
 
+
 let sumatoriaTres = (nota, notaDos) => nota + notaDos;
 
 sumatoriaTres(nota, notaDos);
 
-let sumatoriaCuatro = (nota, notaDos) => {
-    /*producto = nota * notaDos;
-    return producto;*/
 
-    return nota * notaDos;
+let sumatoriaCuatro = (nota, notaDos) => {
+    /* sentencias
+       producto = nota * notaDos;
+       clg
+       return producto;*/
+     return nota * notaDos;
 }
 
 sumatoriaCuatro(nota, notaDos);
 
-//simplificacion del arrow
+// simplificacion del arrow
 
-function (a) {
-    return a + 100;
+let funcionAnonima = function(nota){
+    return nota + 100;
 }
 
 //Primera simplificacion
-(a) => { return a + 100};
 
-//Segunda simplificacion
-(a) => a + 100;
+//(nota) => {return nota+100};
 
-//Tercera simplificacion
-a => a + 100;
+//segunda simplificacion
 
-//callback
+//(nota) => nota+100;
+
+//tercera simplificacion
+
+nota => nota+100;
+
+// callback
 
 function saludar(nombre){
     console.log("hola " + nombre);
+    document.write(nombre);
+    document.write(`<h1> hola ${nombre} </h1>`);
 }
 
 function bienvenidaUsu(callback){
-    let nombre = prompt("Ingrese su nombre:");
+    let nombre = prompt("ingrese su nombre:");
     callback(nombre);
 }
 
 bienvenidaUsu(saludar);
 
-//objeto
+//Objetos
 
 let miAuto = {
-    marca: "Fiat",
+    marca: "fiat",
     tipo: "familiar",
     modelo: 2019
 }
@@ -218,16 +236,11 @@ console.log(miAuto.tipo.length);
 
 document.write(miAuto.tipo.indexOf("i", 5));
 
-console.log(miAuto.tipo.substring(2, 4));
+console.log(miAuto.tipo.substring(0, 4));
 
-let usuario = "Fulano";
+//miAuto.modelo.sqrt(2);
 
-document.write(`<h1> Bienvenido ${usuario}</h1>`);
-
-miAuto.modelo.sqrt(2);
-
-pow(2, 10); //1024
-
+//pow(2, 10);
 
 //Array
 
@@ -235,45 +248,48 @@ const miArray = ["a", 2, "hola"];
 
 miArray[1];
 
-miArray.push("gise");
+miArray[1] = "b";
+
+miArray.push("gise", 10, 20, "Pablo");
+
+console.log(miArray.length);
 
 console.log(miArray);
 
-for (let variable in miArray){
+//Recorrido de un array
+
+for( let variable in miArray){
     console.log(miArray[variable]);
 }
 
-for (let variable of miArray){
+for( let variable of miArray){
     console.log(miArray[variable]);
 }
 
-// forEach y Map
+// ForEach y Map
 
-const numeros = [1, 2, 3, 4, 5, 6];
+const numeros = [5, 3, 1, 6, 4, 2];
 
-const sumaValores = 0;
-
-numeros.forEach( numero => {
+numeros.forEach(numero => {
     console.log(numero);
-}
-);
+})
 
-numeros.forEach( numero => console.log(numero));
+numeros.forEach(numero => console.log(numero));
 
-
-for (let i = 0; i < numeros.length; i++){
-        console.log(numeros[i]);
-}
+console.log(numeros.sort());
 
 //Map
 
-const num = numeros.map(pepe => {
-    return pepe*2;
+const num = numeros.map(nums => {
+    return nums*2;
 });
 
-const pares = miArray.filter( par => par*2 >= 50);
+console.log(num.sort());
 
-const find = pares.find( encontrar => encontrar === 5);
+const pares = miArray.filter(par => par*2 >= 50);
+
+const find = miArray.find(encontrar => encontrar === 50);
+
 
 //DOM
 
@@ -281,17 +297,32 @@ const ul = document.getElementById("lista");
 
 const h3 = document.getElementsByClassName("titulo");
 
-document.getElementsByTagName("li");
+document.getElementsByTagName("div");
 
 document.getElementsByName("formulario");
 
+
 document.querySelector("div");
-document.querySelector(".fondo");
+document.querySelector(".titulo");
 document.querySelector("#lista");
 
 document.querySelectorAll("div");
 
 const btn = document.createElement("button");
-btn.innerHTML = "Esto es un boton JS";
+btn.innerHTML = "Boton enviar";
 document.body.appendChild(btn);
+
+// crear lista en ul
+
+//const numeros = [5, 3, 1, 6, 4, 2];
+//const ul = document.getElementById("lista");
+
+numeros.forEach(numeroLista => {
+
+    const li = document.createElement("li");
+    li.textContent = numeroLista;
+    ul.appendChild(li);
+});
+
+//falta eventos y asincronismo
 
