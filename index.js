@@ -44,7 +44,7 @@ console.log(edad*3);
 
 //Pasar a contenido al HTMl
 
-document.write("Hola estoy en HTML");
+//document.write("Hola estoy en HTML");
 /*
 && || ! == ===
 
@@ -60,7 +60,7 @@ suma += 5;
 %=
 */
 //Estructuras de control
-
+/*
 let nota = 8;
 if(nota >= 7){
     console.log("la nota es aprobada");
@@ -185,7 +185,7 @@ let sumatoriaCuatro = (nota, notaDos) => {
     /* sentencias
        producto = nota * notaDos;
        clg
-       return producto;*/
+       return producto;
      return nota * notaDos;
 }
 
@@ -324,5 +324,85 @@ numeros.forEach(numeroLista => {
     ul.appendChild(li);
 });
 
-//falta eventos y asincronismo
 
+//Eventos 
+
+//nodo.addEventListener("tipo de evento", callback);
+
+const btn = document.querySelector("button");
+
+//rgb( , , );
+
+function random(number){
+    return Math.floor(Math.random()*(number + 1));
+}
+
+btn.addEventListener("click", ()=>{
+    const color = `rgb( ${random(255)}, ${random(255)} , ${random(255)})`;
+    document.body.style.backgroundColor = color;
+});
+
+
+const inputEntrada = document.querySelector("#texto");
+const textoContenedor = document.querySelector("#pantalla");
+
+inputEntrada.addEventListener("keydown", (e)=>(textoContenedor.textContent = `Usted escribio: "${e.key}"`));
+//Target.value
+*/
+// asincronismo
+
+const btnAnterior = document.getElementById("btnAnterior");
+const btnSiguiente = document.getElementById("btnSiguiente");
+const contenedor = document.getElementById("contenedor");
+
+let pagina = 1;
+
+btnAnterior.addEventListener("click", ()=>{
+    if(pagina > 1){
+        pagina -= 1;
+    }
+    cargarPeliculas();
+});
+
+btnSiguiente.addEventListener("click", ()=>{
+    if(pagina < 1000){
+        pagina += 1;
+    }
+    cargarPeliculas();
+});
+
+const cargarPeliculas = async()=>{
+    try{
+        const respuesta = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=191528030c357419329af1198edbcb24&language=es-MX&page=${pagina}`);
+        console.log(respuesta);
+
+        if(respuesta.status === 200){
+            const datos = await respuesta.json();
+            console.log(datos);
+
+            let peliculas = [];
+
+            datos.results.forEach(pelicula => {
+                peliculas += `
+                <div class="card pelicula" style="width: 20rem;">
+                    <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="card-img-top" alt="pelicula">
+                    <div class="card-body">
+                        <h5 class="card-title titulos">${pelicula.title}</h5>
+                        <p class="card-text descripcion"> ${pelicula.overview} </p>
+                    </div>  
+                </div>
+            `;
+
+            });
+
+            contenedor.innerHTML = peliculas;
+        }
+    }
+
+    catch(error){
+        console.log(error.message);
+    }
+}
+
+
+cargarPeliculas();
